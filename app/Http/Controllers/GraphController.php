@@ -38,6 +38,20 @@ class GraphController extends Controller
           }  
     }
 
+    public function getSingleFraphWithNodesAndRelations($id)
+    {
+        if (Graph::where('id', $id)->exists()) {
+            $graph = Graph::find($id);
+            $nodes = $graph->nodes;
+
+            return response($nodes, 200);
+          } else {
+            return response()->json([
+              "message" => "Graph not found"
+            ], 404);
+          }  
+    }
+
     
     public function createGraph(Request $request) {
         $graph = new Graph();
@@ -77,8 +91,8 @@ class GraphController extends Controller
     public function deleteGraph($id) {
         if(Graph::where('id', $id)->exists()) {
           $graph = Graph::find($id);
+          $graph->nodes()->delete();
           $graph->delete();
-  
           return response()->json([
             "message" => "records deleted"
           ], 202);

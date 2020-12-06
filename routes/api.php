@@ -34,6 +34,7 @@ Route::get('graphs/{id}', 'GraphController@getGraph');
 Route::post('graphs', 'GraphController@createGraph');
 Route::put('graphs/{id}', 'GraphController@updateGraph');
 Route::delete('graphs/{id}','GraphController@deleteGraph');
+Route::get('graphs/{id}/nodes/relations', 'GraphController@getSingleFraphWithNodesAndRelations');
 
 
 
@@ -42,3 +43,9 @@ Route::get('nodes/{id}', 'NodeController@getNode');
 Route::post('nodes', 'NodeController@createNode');
 Route::put('nodes/{id}', 'NodeController@updateNode');
 Route::delete('nodes/{id}','NodeController@deleteNode');
+
+Route::get('relations', 'RelationController@getAllNodes');
+Route::get('nodes/{relations}', 'RelationController@getNode');
+Route::post('relations', 'RelationController@createNode');
+Route::put('nodes/{relations}', 'RelationController@updateNode');
+Route::delete('nodesrelationsid}','RelationController@deleteNode');

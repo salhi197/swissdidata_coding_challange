@@ -17,7 +17,6 @@ class CreateNodesTable extends Migration
             $table->id('id');
             $table->bigInteger('graph_id')->unsigned();
             $table->foreign('graph_id')->references('id')->on('graphs')->onDelete('cascade');
-            $table->integer('parent')->nullable(true);
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

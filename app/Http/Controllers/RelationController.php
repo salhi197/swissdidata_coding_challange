@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Node;
 use App\Models\Graph;
+use App\Models\Relation;
 use Illuminate\Http\Request;
 
-class NodeController extends Controller
+class RelationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +16,15 @@ class NodeController extends Controller
      */
     public function getAllNodes()
     {
-        $nodes = Node::all()->toJson(JSON_PRETTY_PRINT);
-        return response($nodes, 200);  
+        $relations = Relation::all()->toJson(JSON_PRETTY_PRINT);
+        return response($relations, 200);  
     }
 
     
-    public function createNode(Request $request) {
+    public function createRelation(Request $request) {
         if (Graph::where('id', $request->graph_id)->exists()) {
             $graph = Graph::find($request->graph_id);
-            $node = new Node();
+            $node = new Relation();
             // $node->graph()->associate($graph);
             $node->graph_id = $request->graph_id;
             $node->save();    
@@ -43,9 +44,9 @@ class NodeController extends Controller
      * @param  \App\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function getNode($id) {
-        if (Node::where('id', $id)->exists()) {
-          $node = Node::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+    public function getRelation($id) {
+        if (Relation::where('id', $id)->exists()) {
+          $node = Relation::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
           return response($node, 200);
         } else {
           return response()->json([
@@ -61,9 +62,9 @@ class NodeController extends Controller
      * @param  \App\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function deleteNode($id) {
-        if(Node::where('id', $id)->exists()) {
-          $node = Node::find($id);
+    public function deleteRelation($id) {
+        if(Relation::where('id', $id)->exists()) {
+          $node = Relation::find($id);
           $node->delete();
   
           return response()->json([
@@ -82,9 +83,9 @@ class NodeController extends Controller
      * @param  \App\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function updateNode(Request $request, $id) {
-        if (Node::where('id', $id)->exists()) {
-          $node = Node::find($id);
+    public function updateRelation(Request $request, $id) {
+        if (Relation::where('id', $id)->exists()) {
+          $node = Relation::find($id);
           $node->name = $request->name ?? $node->name;
           $node->description = $request->description ?? $node->description;
           $node->save();
