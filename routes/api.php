@@ -29,6 +29,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('graphs', 'GraphController@getAllGraphs');
 Route::get('graphs/metadata', 'GraphController@getAllGraphsMetadata');
+Route::get('graphs/nodes/{id}', 'GraphController@getAllGraphsNodes');
 Route::get('graphs/{id}', 'GraphController@getGraph');
 Route::post('graphs', 'GraphController@createGraph');
 Route::put('graphs/{id}', 'GraphController@updateGraph');
@@ -37,7 +38,6 @@ Route::delete('graphs/{id}','GraphController@deleteGraph');
 
 
 Route::get('nodes', 'NodeController@getAllNodes');
-Route::get('nodes/metadata', 'NodeController@getAllNodesMetadata');
 Route::get('nodes/{id}', 'NodeController@getNode');
 Route::post('nodes', 'NodeController@createNode');
 Route::put('nodes/{id}', 'NodeController@updateNode');

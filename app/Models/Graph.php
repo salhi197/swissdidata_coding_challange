@@ -17,6 +17,6 @@ class Graph extends Model
 
     public function nodes()
     {
-        return $this->hasMany('App\Node');
+        return $this->hasMany('App\Models\Node');
     }
 }

@@ -24,6 +24,20 @@ class GraphController extends Controller
         $graphs = Graph::all('name','description')->toJson(JSON_PRETTY_PRINT);
         return response($graphs, 200);  
     }
+
+    public function getAllGraphsNodes($id)
+    {
+        if (Graph::where('id', $id)->exists()) {
+            $graph = Graph::find($id);
+            $nodes = $graph->nodes;
+            return response($nodes, 200);
+          } else {
+            return response()->json([
+              "message" => "Graph not found"
+            ], 404);
+          }  
+    }
+
     
     public function createGraph(Request $request) {
         $graph = new Graph();
@@ -51,7 +65,7 @@ class GraphController extends Controller
             "message" => "Graph not found"
           ], 404);
         }
-      }
+    }
   
     /**
      * Update the specified resource in storage.
