@@ -14,8 +14,11 @@ class CreateGraphsTable extends Migration
     public function up()
     {
         Schema::create('graphs', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->string('name')->unique()->nullable(false);
+            $table->text('description')->nullable(true);
             $table->timestamps();
+            $table->engine = 'InnoDB';
         });
     }
 
